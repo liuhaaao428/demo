@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: mint.demo
+  output:
+    ansi:
+      enabled: always
+  profiles:
+    active: dev
+  thymeleaf:
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    cache: false
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-connections: 500
+    min-spare-threads: 25
+    max-threads: 300
+    accept-count: 200
+  port: 8080
+mybatis:
+  type-aliases-package: com.mint.demo.entity
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.mint.demo.mapper: debug
+
+---
+
+#开发配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: songhuiqiao428
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
