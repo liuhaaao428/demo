@@ -17,5 +17,8 @@ public interface UserEntityMapper {
 
     UserEntity selectById(int id);
 
+    List showPartment(@Param("curPage") int curPage,@Param("pageSize") int pageSize);
+
+
     List showAll(@Param("curPage") int curPage,@Param("pageSize") int pageSize);
 }

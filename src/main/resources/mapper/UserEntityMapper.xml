@@ -69,11 +69,16 @@
   </insert>
 
   <select id="selectCount" resultType="java.lang.Integer">
-    select count(*) from user
+    select count(1) from user
   </select>
 
   <select id="selectById" parameterType="java.lang.Integer" resultType="com.mint.demo.entity.UserEntity">
     select * from user where id = #{id}
+  </select>
+
+
+  <select id="showPartment" parameterType="java.lang.Integer" resultType="com.mint.demo.entity.UserEntity">
+    select * from user limit #{curPage} ,#{pageSize}
   </select>
 
 

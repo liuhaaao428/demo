@@ -31,10 +31,12 @@ public class ShowService {
         List <UserEntity> showList ;
         Map<String,String> page = new HashMap<>();
         Gson showListGson = new Gson();
-        showList = userEntityMapper.showAll((curPage-1)*10,10);
+        showList = userEntityMapper.showPartment((curPage-1)*10,10);
         String showListJson = showListGson.toJson(showList);
         pageInfo.setCurPage(curPage);
         pageInfo.setPageSize(10);
+        pageInfo.setTotalPage();
+        pageInfo.setTotalRows();
         page.put("PageInfo",pageInfo.toString());
         page.put("ShowListJson",showListJson);
         return page;

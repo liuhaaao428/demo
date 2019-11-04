@@ -10,6 +10,11 @@ spring:
     encoding: UTF-8
     prefix: classpath:/templates/
     cache: false
+  servlet:
+    multipart:
+      max-file-size: 64000MB
+      max-request-size: 6400MB
+
 
 server:
   tomcat:
@@ -38,3 +43,7 @@ spring:
     password: songhuiqiao428
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+
+image:
+  path: C:\Users\liuhao\IdeaProjects\demo\src\main\resources\static
+  host: http://localhost:8080/

@@ -36,4 +36,7 @@ public class ShowController {
         return showService.showUser(curPage);
     }
 
+
+
+
 }

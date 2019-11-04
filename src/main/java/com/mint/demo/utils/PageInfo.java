@@ -2,7 +2,10 @@ package com.mint.demo.utils;
 
 import com.mint.demo.mapper.UserEntityMapper;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -10,10 +13,11 @@ import org.springframework.stereotype.Component;
  * Date: 2019/10/25
  * Time: 14:27
  */
-@Data
 @Component
+@Resource
 public class PageInfo {
 
+    @Autowired
     UserEntityMapper userEntityMapper;
 
     private int curPage;
@@ -35,21 +39,71 @@ public class PageInfo {
     private int totalRows;
     //一共有多少行
 
-    public int getTotalPage(){
 
-        if(totalRows%pageSize==0){
-            totalPage=totalRows/pageSize;
+    public void setPageSize(int pageSize){
+
+        this.pageSize = pageSize;
+    }
+
+    public int getPageSize(){
+
+        return this.pageSize;
+    }
+
+
+    public void setCurPage(int curPage){
+
+        this.curPage = curPage;
+    }
+
+
+    public int getCurPage(){
+
+        return this.curPage;
+    }
+
+
+    public void setTotalPage(){
+
+        if(totalRows%this.pageSize==0){
+            this.totalPage=this.totalRows/this.pageSize;
         }
         else {
-            totalPage=totalRows/pageSize+1;
+            this.totalPage=this.totalRows/this.pageSize+1;
+        }
+
+    }
+
+    public int getTotalPage(){
+
+        if(totalRows%this.pageSize==0){
+            totalPage=this.totalRows/this.pageSize;
+        }
+        else {
+            totalPage=this.totalRows/this.pageSize+1;
         }
         return totalPage;
 
     }
 
+
+
+    public void setTotalRows(){
+
+        this.totalRows = userEntityMapper.selectCount();
+    }
+
+
+
+    public int getTotalRows(){
+
+        return this.totalRows;
+    }
+
+
     public boolean getHasPriviousPage(){
 
-        if(curPage==0){
+        if(curPage==1){
             return false;
         }
         else{
@@ -69,6 +123,6 @@ public class PageInfo {
     }
 
     public String toString(){
-        return "{'curPage':"+curPage+",'totalPage':"+totalPage+",'pageSize':"+pageSize+",'hasPriviousPage':"+hasPriviousPage+",'hasNextPage':"+hasNextPage+"}";
+        return "{\"curPage\":"+this.getCurPage()+",\"totalPage\":"+this.getTotalPage()+",\"pageSize\":"+this.getPageSize()+",\"hasPriviousPage\":"+"\""+this.getHasPriviousPage()+"\""+",\"hasNextPage\""+":"+"\""+this.getHasNextPage()+"\""+",\"totalRows\":"+this.getTotalRows()+"}";
     }
 }
